@@ -1,0 +1,8 @@
+﻿  CreatorTasks.cpp
+c:\users\виталий\documents\visual studio 2015\projects\consoleapplication2\consoleapplication2\creatortasks.cpp(82): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\виталий\documents\visual studio 2015\projects\consoleapplication2\consoleapplication2\creatortasks.cpp(96): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\виталий\documents\visual studio 2015\projects\consoleapplication2\consoleapplication2\creatortasks.cpp(108): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\виталий\documents\visual studio 2015\projects\consoleapplication2\consoleapplication2\creatortasks.cpp(89): warning C4172: возвращение адреса локальной или временной переменной : str
+c:\users\виталий\documents\visual studio 2015\projects\consoleapplication2\consoleapplication2\creatortasks.cpp(103): warning C4172: возвращение адреса локальной или временной переменной : str
+  ConsoleApplication2.vcxproj -> C:\Users\Виталий\Documents\Visual Studio 2015\Projects\ConsoleApplication2\Debug\ConsoleApplication2.exe
+  ConsoleApplication2.vcxproj -> C:\Users\Виталий\Documents\Visual Studio 2015\Projects\ConsoleApplication2\Debug\ConsoleApplication2.pdb (Full PDB)
