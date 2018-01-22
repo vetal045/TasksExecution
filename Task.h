@@ -13,7 +13,6 @@ class Task
 	//
 
 public:
-
 	Task();
 	Task(std::string strTaskType, std::string strTaskDescription, int taskTime);
 
@@ -24,7 +23,6 @@ public:
 	//
 
 public:
-
 	const std::string& getTaskType() const;
 	const std::string& getTaskDescription() const;
 	const int getTaskTime() const;
@@ -33,8 +31,6 @@ public:
 	void setTaskDescription(const std::string& strTaskDescription);
 	void setTaskTime(const int taskTime);
 
-	void showTaskType() const;
-	void showTaskDescription() const;
 	virtual void showProgressTask() const;
 
 	//
@@ -45,7 +41,6 @@ protected:
 	std::string strTaskType_;
 	std::string strTaskDescription_;
 	int taskTime_;
-	const int N = 1000; //for function Sleep
 };
 
 //
@@ -64,10 +59,6 @@ public:
 		Task(strNormalTaskType, strNormalTaskDescription,normalTaskTime) {}
 
 	~NormalTask() {}
-
-	//
-	// Protected data members.
-	//
 };
 
 //
@@ -92,5 +83,5 @@ public:
 	// Public methods.
 	//
 
-	void showProgressTask() const;
+	void showProgressTask() const override;
 };

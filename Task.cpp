@@ -1,10 +1,11 @@
 #include "Task.h"
 
 #include <iostream>
-#include <Windows.h>
 #include <string>
 #include <random>
 #include <ctime>
+#include <chrono>
+#include <thread>
 
 Task::Task()
 {
@@ -54,21 +55,11 @@ void Task::setTaskTime(const int taskTime)
 	taskTime_ = taskTime;
 }
 
-void Task::showTaskType() const
-{
-	std::cout << strTaskType_ << "\n";
-}
-
-void Task::showTaskDescription() const
-{
-	std::cout << strTaskDescription_ << "\n";
-}
-
 void Task::showProgressTask() const
 {
 	std::cout << "In progress...\n";
 
-	Sleep(taskTime_*N);
+	std::this_thread::sleep_for(std::chrono::seconds(taskTime_));
 
 	std::cout << "Finished\n";
 }
@@ -86,7 +77,7 @@ void RandomTask::showProgressTask() const
 	}
 	else
 	{
-		Sleep(taskTime_*N);
+		std::this_thread::sleep_for(std::chrono::seconds(taskTime_));
 
 		std::cout << "Finished\n";
 	}

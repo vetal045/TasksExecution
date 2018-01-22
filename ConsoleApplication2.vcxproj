@@ -149,10 +149,12 @@
     <ClCompile Include="CreatorTasks.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Task.cpp" />
+    <ClCompile Include="TaskExecution.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CreatorTasks.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="TaskExecution.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,11 +6,10 @@
 #include <thread>
 #include <chrono>
 #include <string>
+#include <memory>
 
 CreatorTasks::CreatorTasks()
 {
-	enter();
-	thread_print();
 }
 
 CreatorTasks::~CreatorTasks()
@@ -35,37 +34,45 @@ void CreatorTasks::enter()
 
 		switch (choice)
 		{
-		case 0:
-			task_ = new NormalTask();
-			task_->setTaskType("NormalTask");
+			case 0:
+			{
+				std::lock_guard<std::mutex> lock(mutexTasks_);
 
-			std::cout << "Enter description of normal task: ";
-			std::cin>>strDescription;
-			task_->setTaskDescription(strDescription);
+				task_ = std::make_shared<NormalTask>();
+				task_->setTaskType("NormalTask");
 
-			std::cout << "Enter time of execution task: ";
-			std::cin >> intTimeTask;
-			task_->setTaskTime(intTimeTask);
+				std::cout << "Enter description of normal task: ";
+				std::cin >> strDescription;
+				task_->setTaskDescription(strDescription);
 
-			tasks_.push_back(task_);
+				std::cout << "Enter time of execution task: ";
+				std::cin >> intTimeTask;
+				task_->setTaskTime(intTimeTask);
 
-			break;
+				tasks_.push_back(task_);
 
-		case 1:
-			task_ = new RandomTask();
-			task_->setTaskType("RandomTask");
+				break;
+			}
 
-			std::cout << "Enter description of normal task: ";
-			std::cin >> strDescription;
-			task_->setTaskDescription(strDescription);
+			case 1:
+			{
+				std::lock_guard<std::mutex> lock(mutexTasks_);
 
-			std::cout << "Enter time of execution task: ";
-			std::cin >> intTimeTask;
-			task_->setTaskTime(intTimeTask);
+				task_ = std::make_shared<RandomTask>();
+				task_->setTaskType("RandomTask");
 
-			tasks_.push_back(task_);
+				std::cout << "Enter description of normal task: ";
+				std::cin >> strDescription;
+				task_->setTaskDescription(strDescription);
 
-			break;
+				std::cout << "Enter time of execution task: ";
+				std::cin >> intTimeTask;
+				task_->setTaskTime(intTimeTask);
+
+				tasks_.push_back(task_);
+
+				break;
+			}
 
 		default:
 			std::cout << "Error enter\n\n";
@@ -73,120 +80,14 @@ void CreatorTasks::enter()
 			break;
 		}
 	}
-}
-
-const std::string& CreatorTasks::showTypes(int i)
-{
-	std::string str(tasks_[i]->getTaskType());
-
-	if (i < tasks_.size() && mutexTasks_.try_lock())
-	{
-		std::cout << str << std::endl;
-
-		mutexTasks_.unlock();
-	}
-
-	return str;
-}
-
-const std::string& CreatorTasks::showDescriptions(int i)
-{
-	std::string str(tasks_[i]->getTaskDescription());
-
-	if (i < tasks_.size() && mutexTasks_.try_lock())
-	{
-		std::cout << str << std::endl;
-
-		mutexTasks_.unlock();	
-	}
-
-	return str;
-}
-
-const int CreatorTasks::showProgress(int i)
-{
-	if (i < tasks_.size() && mutexTasks_.try_lock())
-	{
-		tasks_[i]->showProgressTask();
-
-		std::cout << std::endl;
-
-		mutexTasks_.unlock();
-	}
-
-	return tasks_[i]->getTaskTime();
-}
-
-void CreatorTasks::thread_print() 
-{
 	std::cout << std::endl;
-
-	auto printTypes = [&]()
-	{
-		for (auto i = 0; i<numberTask_; ++i)
-		{
-			std::this_thread::sleep_for(std::chrono::seconds(1));
-
-			std::unique_lock<std::mutex> lock(mutexThreads_);
-
-			std::cout << "Type of task#" << i+1 << " - ";
-			std::async(std::launch::async, &CreatorTasks::showTypes, this,i);
-
-			std::cout << std::endl;
-		}
-		isDoneTypes_ = true;
-
-		condTasks_.notify_one();
-	};
-
-	auto printDescriptions = [&]()
-	{
-		std::unique_lock<std::mutex> lock(mutexThreads_);
-
-		while (!isDoneTypes_) 
-		{
-			condTasks_.wait(lock);
-
-			if (isDoneTypes_)
-			{
-				for (auto i = 0; i < numberTask_; ++i)
-				{
-					std::cout << "Description of task#" << i + 1 <<" - ";
-					std::async(std::launch::async, &CreatorTasks::showDescriptions, this, i);
-
-					std::cout << std::endl;
-				}
-			}
-		}
-		isDoneDescriptions_ = true;
-
-		condDescriptions_.notify_one();
-	};
-
-	auto printProgress = [&]()
-	{
-		std::unique_lock<std::mutex> lock(mutexThreads_);
-
-		while (!isDoneDescriptions_)
-		{
-			condDescriptions_.wait(lock);
-
-			if (isDoneDescriptions_)
-			{
-				for (auto i = 0; i < numberTask_; ++i)
-				{
-					std::cout << "Execution of task#" << i + 1 << ".\n";
-					std::async(std::launch::async, &CreatorTasks::showProgress, this, i);
-				}
-			}
-		}
-	};
-
-	std::thread t1(printTypes);
-	std::thread t2(printDescriptions);
-	std::thread t3(printProgress);
-
-	t1.join();
-	t2.join();
-	t3.join();
 }
+
+const std::vector<std::shared_ptr<Task>>& CreatorTasks::getTasksVector() const
+{
+	return tasks_;
+}
+
+
+
+

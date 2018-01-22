@@ -24,12 +24,18 @@
     <ClCompile Include="CreatorTasks.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="TaskExecution.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Task.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="CreatorTasks.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskExecution.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
