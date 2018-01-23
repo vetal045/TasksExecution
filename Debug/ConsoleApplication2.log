@@ -1,7 +1,8 @@
 ﻿  TaskExecution.cpp
-  Создание кода...
-  Компиляция...
+  Task.cpp
+c:\consoleapplication2\consoleapplication2\task.cpp(71): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   Source.cpp
+  CreatorTasks.cpp
   Создание кода...
   ConsoleApplication2.vcxproj -> C:\ConsoleApplication2\Debug\ConsoleApplication2.exe
   ConsoleApplication2.vcxproj -> C:\ConsoleApplication2\Debug\ConsoleApplication2.pdb (Full PDB)
