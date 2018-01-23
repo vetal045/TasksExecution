@@ -10,6 +10,8 @@ TaskExecution::TaskExecution()
 	try
 	{
 		threadTasks_ = std::make_shared<CreatorTasks>();
+		threadTasks_->enter();
+		work();
 	}
 
 	catch (const std::exception&)
@@ -22,9 +24,6 @@ TaskExecution::TaskExecution()
 	{
 		std::cout << "Uknown error.\n";
 	}
-
-	threadTasks_->enter();
-	work();
 }
 
 

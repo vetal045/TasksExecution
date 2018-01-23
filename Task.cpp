@@ -9,8 +9,6 @@
 
 Task::Task()
 {
-	strTaskType_ = '\0';
-	strTaskDescription_ = '\0';
 	taskTime_ = 0;
 }
 
@@ -26,7 +24,6 @@ Task::~Task()
 
 const std::string& Task::getTaskType() const
 {
-	//std::cout << strTaskType_ << std::endl;
 	return strTaskType_;
 }
 
@@ -62,6 +59,24 @@ void Task::showProgressTask() const
 	std::this_thread::sleep_for(std::chrono::seconds(taskTime_));
 
 	std::cout << "Finished\n";
+}
+
+NormalTask::NormalTask()
+{
+	strTaskType_ = "NormalTask";
+}
+
+NormalTask::~NormalTask()
+{
+}
+
+RandomTask::RandomTask()
+{
+	strTaskType_ = "RandomTask";
+}
+
+RandomTask::~RandomTask()
+{
 }
 
 void RandomTask::showProgressTask() const

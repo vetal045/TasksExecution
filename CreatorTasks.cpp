@@ -38,8 +38,8 @@ void CreatorTasks::enter()
 			{
 				std::lock_guard<std::mutex> lock(mutexTasks_);
 
-				task_ = std::make_shared<NormalTask>();
-				task_->setTaskType("NormalTask");
+				std::shared_ptr<Task> task_ = std::make_shared<NormalTask>();
+				//task_->setTaskType("NormalTask");
 
 				std::cout << "Enter description of normal task: ";
 				std::cin >> strDescription;
@@ -58,8 +58,8 @@ void CreatorTasks::enter()
 			{
 				std::lock_guard<std::mutex> lock(mutexTasks_);
 
-				task_ = std::make_shared<RandomTask>();
-				task_->setTaskType("RandomTask");
+				std::shared_ptr<Task> task_ = std::make_shared<RandomTask>();
+				//task_->setTaskType("RandomTask");
 
 				std::cout << "Enter description of normal task: ";
 				std::cin >> strDescription;

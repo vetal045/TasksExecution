@@ -33,7 +33,6 @@ public:
 public:
 	int numberTask_;
 	std::mutex mutexTasks_;
-	std::shared_ptr<Task> task_;
 	std::vector <std::shared_ptr<Task>> tasks_;
 };
 

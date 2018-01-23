@@ -54,11 +54,11 @@ class NormalTask :public Task
 	//
 
 public:
-	NormalTask() {}
+	NormalTask();
 	NormalTask(std::string strNormalTaskType, std::string strNormalTaskDescription, int normalTaskTime):
 		Task(strNormalTaskType, strNormalTaskDescription,normalTaskTime) {}
 
-	~NormalTask() {}
+	~NormalTask();
 };
 
 //
@@ -73,11 +73,11 @@ class RandomTask : public Task
 
 public:
 
-	RandomTask() {}
+	RandomTask();
 	RandomTask(std::string strNormalTaskType, std::string strNormalTaskDescription, int normalTaskTime) :
 		Task(strNormalTaskType, strNormalTaskDescription, normalTaskTime) {}
 
-	~RandomTask() {}
+	~RandomTask();
 
 	//
 	// Public methods.
