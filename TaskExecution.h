@@ -3,6 +3,7 @@
 #include "CreatorTasks.h"
 
 #include <memory>
+#include <future>
 
 //
 // Declaration of the class TaskExecution.
@@ -31,5 +32,6 @@ public:
 private:
 	std::mutex mutexTasks_;
 	std::shared_ptr<CreatorTasks> threadTasks_;
+	std::future<void> tasksFuture_;
 };
 

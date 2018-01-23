@@ -29,6 +29,7 @@ TaskExecution::TaskExecution()
 
 TaskExecution::~TaskExecution()
 {
+	tasksFuture_.get();
 }
 
 void TaskExecution::showTasksTypes()
@@ -73,7 +74,7 @@ void TaskExecution::showTasksDescriptions()
 
 void TaskExecution::work()
 {
-	std::async(std::launch::async, &TaskExecution::showTasksTypes,this);
-	std::async(std::launch::async, &TaskExecution::showTasksDescriptions, this);
-	std::async(std::launch::async, &TaskExecution::showTasksProgress, this);
+	tasksFuture_ = std::async(std::launch::async, &TaskExecution::showTasksTypes,this);
+	tasksFuture_ = std::async(std::launch::async, &TaskExecution::showTasksDescriptions, this);
+	tasksFuture_ = std::async(std::launch::async, &TaskExecution::showTasksProgress, this);
 }

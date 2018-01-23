@@ -1,5 +1,4 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ConsoleApplication2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Task.cpp
-c:\consoleapplication2\consoleapplication2\task.cpp(86): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  TaskExecution.cpp
   ConsoleApplication2.vcxproj -> C:\ConsoleApplication2\Debug\TaskExecution.exe
   ConsoleApplication2.vcxproj -> C:\ConsoleApplication2\Debug\TaskExecution.pdb (Full PDB)
