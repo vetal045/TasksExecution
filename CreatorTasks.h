@@ -25,14 +25,15 @@ public:
 
 	void enter();
 	const std::vector<std::shared_ptr<Task>>& getTasksVector() const;
+	const int getSize() const;
+	const std::shared_ptr<Task>& getTask( const int i) const;
 
 	//
-	// Protected data members.
+	// Private data members.
 	//
 
-public:
+private:
 	int numberTask_;
-	std::mutex mutexTasks_;
 	std::vector <std::shared_ptr<Task>> tasks_;
 };
 

@@ -36,10 +36,7 @@ void CreatorTasks::enter()
 		{
 			case 0:
 			{
-				std::lock_guard<std::mutex> lock(mutexTasks_);
-
 				std::shared_ptr<Task> task_ = std::make_shared<NormalTask>();
-				//task_->setTaskType("NormalTask");
 
 				std::cout << "Enter description of normal task: ";
 				std::cin >> strDescription;
@@ -56,10 +53,7 @@ void CreatorTasks::enter()
 
 			case 1:
 			{
-				std::lock_guard<std::mutex> lock(mutexTasks_);
-
 				std::shared_ptr<Task> task_ = std::make_shared<RandomTask>();
-				//task_->setTaskType("RandomTask");
 
 				std::cout << "Enter description of normal task: ";
 				std::cin >> strDescription;
@@ -86,6 +80,16 @@ void CreatorTasks::enter()
 const std::vector<std::shared_ptr<Task>>& CreatorTasks::getTasksVector() const
 {
 	return tasks_;
+}
+
+const int CreatorTasks::getSize() const
+{
+	return tasks_.size();
+}
+
+const std::shared_ptr<Task>& CreatorTasks::getTask(const int i) const
+{
+	return tasks_[i];
 }
 
 

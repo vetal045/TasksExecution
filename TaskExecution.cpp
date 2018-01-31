@@ -29,16 +29,18 @@ TaskExecution::TaskExecution()
 
 TaskExecution::~TaskExecution()
 {
-	tasksFuture_.get();
+	tasksFutureType_.get();
+	tasksFutureDescription_.get();
+	tasksFutureProgress_.get();
 }
 
 void TaskExecution::showTasksTypes()
 {
-	for (auto i = 0; i < threadTasks_->numberTask_; ++i)
+	for (auto i = 0; i < threadTasks_->getSize(); ++i)
 	{
 		std::lock_guard<std::mutex> lock(mutexTasks_);
 
-		std::cout << "Type of task #" << i << ": " << threadTasks_->tasks_[i]->getTaskType() << std::endl;
+		std::cout << "Type of task #" << i << ": " << threadTasks_->getTask(i)->getTaskType() << std::endl;
 	}
 
 	std::cout << std::endl;
@@ -46,13 +48,13 @@ void TaskExecution::showTasksTypes()
 
 void TaskExecution::showTasksProgress()
 {
-	for (auto i = 0; i < threadTasks_->numberTask_; ++i)
+	for (auto i = 0; i < threadTasks_->getSize(); ++i)
 	{
 		std::lock_guard<std::mutex> lock(mutexTasks_);
 
 		std::cout << "Progress of task #" << i << std::endl;
 
-		threadTasks_->tasks_[i]->showProgressTask();
+		threadTasks_->getTask(i)->showProgressTask();
 
 		std::cout << std::endl;
 	}
@@ -62,11 +64,11 @@ void TaskExecution::showTasksProgress()
 
 void TaskExecution::showTasksDescriptions()
 {
-	for (auto i = 0; i < threadTasks_->numberTask_; ++i)
+	for (auto i = 0; i < threadTasks_->getSize(); ++i)
 	{
 		std::lock_guard<std::mutex> lock(mutexTasks_);
 
-		std::cout << "Description of task #" << i << ": " << threadTasks_->tasks_[i]->getTaskDescription() << std::endl;
+		std::cout << "Description of task #" << i << ": " << threadTasks_->getTask(i)->getTaskDescription() << std::endl;
 	}
 
 	std::cout << std::endl;
@@ -74,7 +76,7 @@ void TaskExecution::showTasksDescriptions()
 
 void TaskExecution::work()
 {
-	tasksFuture_ = std::async(std::launch::async, &TaskExecution::showTasksTypes,this);
-	tasksFuture_ = std::async(std::launch::async, &TaskExecution::showTasksDescriptions, this);
-	tasksFuture_ = std::async(std::launch::async, &TaskExecution::showTasksProgress, this);
+	tasksFutureType_ = std::async(std::launch::async, &TaskExecution::showTasksTypes,this);
+	tasksFutureDescription_ = std::async(std::launch::async, &TaskExecution::showTasksDescriptions, this);
+	tasksFutureProgress_ = std::async(std::launch::async, &TaskExecution::showTasksProgress, this);
 }

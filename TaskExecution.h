@@ -29,9 +29,15 @@ public:
 	void showTasksDescriptions();
 	void work();
 
+	//
+	// Private data members.
+	//
+
 private:
 	std::mutex mutexTasks_;
 	std::shared_ptr<CreatorTasks> threadTasks_;
-	std::future<void> tasksFuture_;
+	std::future<void> tasksFutureType_;
+	std::future<void> tasksFutureDescription_;
+	std::future<void> tasksFutureProgress_;
 };
 
